@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Atualização de Valor</title>
+    <style>
+        /* Estilo para centralizar o valor exibido */
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center-div">
+        <!-- Exibir o valor atual -->
+        Valor atual: <span id="currentValue">0</span>
+    </div>
+
+    <script>
+        // Valor inicial
+        let value = 0;
+
+        // Função para atualizar o valor
+        async function updateValue(){
+            try {
+                // Fazer a chamada fetch e esperar pela resposta
+                const response = await fetch('http://192.168.4.1/LDR');
+                
+                // Verificar se a chamada foi bem-sucedida
+                if (!response.ok) {
+                    console.error("Erro na chamada fetch:", response.status);
+                    return;
+                }
+                
+                // Converter a resposta em texto (ou em JSON, dependendo da resposta do servidor)
+                const textValue = await response.text();
+                value = textValue; // Ou JSON.parse(textValue) se for JSON 
+
+            } catch (error) {
+                value = 'erro'
+            }
+
+            // Atualizar o valor exibido na página
+            document.getElementById('currentValue').innerText = value;
+        }
+
+        // Chamar a função 'updateValue' a cada 500 milissegundos
+        setInterval(updateValue, 500);
+    </script>
+
+</body>
+</html>

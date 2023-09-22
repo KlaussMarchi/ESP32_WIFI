@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Barra de Rolagem</title>
+    <style>
+        /* Estilo para centralizar a barra de rolagem e o valor exibido */
+        .center-div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center-div">
+        <input type="range" id="myRange" min="0" max="255" step="1" oninput="valueChanged(this.value)">
+        <p>Valor atual: <span id="currentValue">0</span></p>
+    </div>
+
+    <script>
+        // Função JavaScript que é chamada quando o valor da barra de rolagem é alterado
+        function valueChanged(newValue) {
+            document.getElementById('currentValue').innerText = newValue;
+            fetch('http://192.168.4.1/PWM$' + newValue + '!')
+        }
+    </script>
+
+</body>
+</html>

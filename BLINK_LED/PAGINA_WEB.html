@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Botões Centralizados</title>
+    <style>
+        /* Estilos para centralizar os botões */
+        .center-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        /* Estilos para os botões */
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="center-div">
+        <button onclick="ativar()">Ativar LED</button>
+        <button onclick="desativar()">Desativar LED</button>
+    </div>
+
+    <script>
+        function ativar(){
+            fetch('http://192.168.4.1/ATIVAR')
+        }
+        
+        function desativar(){
+            fetch('http://192.168.4.1/DESATIVAR')
+        }
+    </script>
+
+</body>
+</html>
